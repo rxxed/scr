@@ -1,0 +1,6 @@
+#!/bin/bash
+
+search=$(echo | dmenu -p "Search dictionary")
+[ -z "$search" ] && exit
+
+$BROWSER --new-tab "https://www.merriam-webster.com/dictionary/$search"

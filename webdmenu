@@ -1,0 +1,8 @@
+#!/bin/sh
+
+chosen=$(cat ~/.config/bmsweb | awk '{print $1}' | dmenu -i)
+[ -z "$chosen" ] && exit
+
+site=$(grep ^$chosen ~/.config/bmsweb | awk '{print $2}')
+
+brave --new-tab $site

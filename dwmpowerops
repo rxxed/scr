@@ -1,0 +1,19 @@
+#!/bin/sh
+
+choice=$(echo -e "Lock Screen\nLeave dwm\nShutdown\nReboot" | dmenu -i)
+[ -z "$choice" ] && exit
+
+case "$choice" in
+        "Lock Screen")
+                sleep 0.2
+                slock ;;
+        "Leave dwm")
+                [ "No" == $(prompt "Sure?") ] ||
+                        killall dwm ;;
+        "Shutdown")
+                [ "No" == $(prompt "Sure?") ] ||
+                        sudo poweroff ;;
+        "Reboot")
+                [ "No" == $(prompt "Sure?") ] ||
+                        sudo reboot ;;
+esac

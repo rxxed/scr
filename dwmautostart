@@ -1,0 +1,14 @@
+#!/bin/sh
+
+feh --bg-fill --no-fehbg /home/rsh/.config/wall.png
+pkill picom
+picom &
+pkill dunst
+dunst &
+pkill mpd
+mpd &
+pkill sxhkd
+sxhkd -c ~/repos/dwm/dwmsxhkdrc &
+pkill dwmbar
+dwmbar &
+wal --theme base16-pop

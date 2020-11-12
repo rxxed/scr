@@ -1,0 +1,5 @@
+#!/bin/sh
+
+chosen=$(echo -e "No\nYes" | dmenu -i -p $1)
+[ -z "$chosen" ] && exit
+echo $chosen

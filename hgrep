@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+grep $1 $HOME/.cache/history

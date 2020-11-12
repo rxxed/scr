@@ -1,0 +1,4 @@
+#!/bin/sh
+
+vidurl=$(xclip -o -selection 2> /dev/null)
+mpv $vidurl

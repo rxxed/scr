@@ -1,0 +1,6 @@
+#!/bin/sh
+
+id=$(echo | dmenu -p "Enter the 6 digit code")
+[ -z $id ] && exit
+
+$BROWSER --open-url https://nhentai.net/g/$id/

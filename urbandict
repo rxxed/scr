@@ -1,0 +1,5 @@
+#!/bin/bash
+
+search=$(echo | dmenu -p "Search urban dictionary")
+[ -z "$search" ] && exit
+$BROWSER --new-tab "https://www.urbandictionary.com/define.php?term=$search"

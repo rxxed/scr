@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# check if spotify is running
+count=$(ps aux | grep -i spotify | grep -v "grep" | wc -l)
+
+if [ $count -lt 3 ]
+then
+    echo "Spotify disconnected"
+    exit
+fi
+
+artist=$(playerctl -p spotify metadata artist)
+song=$(playerctl -p spotify metadata title)
+
+echo $artist - $song
+exit

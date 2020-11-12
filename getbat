@@ -1,0 +1,14 @@
+#!/bin/sh
+
+bat=$(acpi | grep "Battery 0" | awk '{print $4}' | tr -d ',%')
+if [ $bat > 90 ]; then
+        echo  $bat && exit
+elif [ $bat > 70 ]; then
+        echo  $bat && exit
+elif [ $bat > 50 ]; then
+        echo  $bat && exit
+elif [ $bat > 35 ]; then
+        echo  $bat && exit
+else
+        echo  $bat && exit
+fi

@@ -1,0 +1,43 @@
+#!/bin/env sh
+
+#
+# change brightness using xrandr
+# usage: xbrightctl <up|down>
+#
+
+[ -z "$1" ] && echo "No 'up' or 'down' options given." && exit
+[ -e ~/.config/brightval ] || echo 0.6 > ~/.config/brightval
+
+val=$(cat ~/.config/brightval)
+
+# brightness will not exceed this limit
+high=1.0
+low=0.1
+
+increase() {
+    if [ 1 -eq $(echo "scale=1; ${val} >= ${high}" | bc) ]; then
+        echo "Brightness has hit its limit."
+        exit
+    fi
+
+    echo "scale=1; $val + 0.1" | bc > ~/.config/brightval
+    val=$(cat ~/.config/brightval)
+    xrandr --output eDP-1 --brightness $val
+}
+
+decrease() {
+    if [ 1 -eq $(echo "scale=1; ${val} <= ${low}" | bc) ]; then
+        echo "Brightness has hit its limit."
+        exit
+    fi
+
+    echo "scale=1; $val - 0.1" | bc > ~/.config/brightval
+    val=$(cat ~/.config/brightval)
+    xrandr --output eDP-1 --brightness $val
+}
+
+case "$1" in
+    "up") increase;;
+    "down") decrease;;
+    *) echo "Invalid argument: $1";;
+esac

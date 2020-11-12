@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+import qrcode
+import pyperclip
+
+img = qrcode.make(pyperclip.paste())
+img.show()

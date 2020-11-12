@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd ~/.config
+fil=$(fzf --height=80% --reverse)
+
+[ -z $fil ] && exit
+
+nvim $fil

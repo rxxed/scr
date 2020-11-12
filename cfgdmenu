@@ -1,0 +1,8 @@
+#!/bin/sh
+
+chosen=$(cat ~/.config/bmcfg | awk '{print $1}' | dmenu -i -p "Which config file?")
+[ -z $chosen ] && exit
+
+file=$(grep ^$chosen ~/.config/bmcfg | awk '{print $2}')
+
+st -e nvim $file

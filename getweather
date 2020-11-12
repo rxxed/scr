@@ -1,0 +1,5 @@
+#!/bin/sh
+# usage: getweather <city>
+
+weather=$(curl "wttr.in/$1?format=%C%20%t" 2> /dev/null)
+echo $weather

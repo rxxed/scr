@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+#
+# usage: wiktionary <term>
+#
+
+import sys, os
+import requests
+from bs4 import BeautifulSoup
+
+term = ' '.join(sys.argv[1:])
+
+req = requests.get(f"https://en.wiktionary.org/wiki/{term}")
+if req.status_code != 200:
+    exit()
+
+soup = BeautifulSoup(req.content, "lxml")
+definitions = soup.findAll("div", class_="NavHead")
+
+i = 1
+for defn in definitions:
+    if defn.string != None:
+        print(f"{i}. {defn.string}")
+        i += 1

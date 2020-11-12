@@ -1,0 +1,43 @@
+#!/bin/bash
+
+con() {
+        if [ $(ip addr | grep wlp1s0 | head -1 | awk '{print $9}') == "UP" ]; then
+                echo Y
+        else
+                echo N
+        fi
+}
+
+bat() {
+        percent=$(acpi | grep "Battery 1" | awk '{print $4}' | tr -d ',%')
+        state=$(acpi | grep "Battery 0" | awk '{print $3}' | tr -d ',')
+        [ $state == "Charging" ] && echo "(c)$percent" && return
+        echo $percent
+}
+
+datetime() {
+        date +"%a %d %b %Y %H:%M"
+}
+
+ram() {
+        percent=$(free | awk '/Mem/ {print $3/$2*100}')
+        printf "%.0f" $percent
+}
+
+upgrades() {
+        pacman -Qu | wc -l
+}
+
+temp () {
+        sensors | awk '/^CPU/ {print $2}'
+}
+
+avail_storage() {
+        df -h | grep '/dev/sda8' | awk '{print $4}'
+}
+
+while true; do
+        # xsetroot -name " $(datetime) $(bat)|$(con)"
+        xsetroot -name "$(mpc status | head -1)  $(datetime)  U:$(upgrades)  $(temp)  D:$(avail_storage)  M:$(ram)%  W:$(con)  B:$(bat)%"
+        sleep 5s
+done

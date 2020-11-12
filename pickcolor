@@ -1,0 +1,8 @@
+#!/bin/sh
+
+notify-send -t 300 "Click on a color"
+
+picked=$(colorpicker --short --one-shot)
+echo $picked | xclip -selection clipboard
+
+dunstify "$picked copied to clipboard"

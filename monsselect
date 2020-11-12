@@ -1,0 +1,12 @@
+#!/bin/sh
+
+choice=$(echo -e "Primary Monitor\nSecond Monitor\nDuplicate Primary\nMirror Primary" | dmenu -i -p "Select monitor arrangement: ")
+
+[ -z "$choice" ] && exit
+
+case "$choice" in
+    "Primary Monitor") mons -o;;
+    "Second Monitor") mons -s;;
+    "Duplicate Primary") mons -d;;
+    "Mirror Primary") mons -m;;
+esac

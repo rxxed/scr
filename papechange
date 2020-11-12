@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pape=$(ls ~/pics/papes | shuf | sed 1q)
+echo $pape
+cp ~/pics/papes/$pape ~/.config/wall.png
+feh --bg-scale --no-fehbg ~/.config/wall.png

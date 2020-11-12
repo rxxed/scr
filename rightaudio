@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+alsactl kill rescan
+alsactl kill quit
+pulseaudio --kill
+pulseaudio --start
+alsactl init

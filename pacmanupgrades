@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "n" | sudo pacman -Syu 1> /dev/null 2>&1
+
+updates=$(pacman -Qu | wc -l)
+echo $updates

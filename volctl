@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $1 in
+    "up")
+            pactl set-sink-volume 0 +$2% &&
+                    notify-send "Volume Up $(ponymix get-volume)" -t 200 -i $HOME/.config/volume_up_icon.png;;
+    "down")
+            pactl set-sink-volume 0 -$2% &&
+                    notify-send "Volume Down $(ponymix get-volume)" -t 200 -i $HOME/.config/volume_down_icon.png;;
+    "mute")
+            pactl set-sink-mute 0 toggle &&
+                    notify-send "Volume Muted $(ponymix get-volume)" -t 200 -i $HOME/.config/volume_mute_icon.png;;
+esac

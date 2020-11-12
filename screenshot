@@ -1,0 +1,17 @@
+#!/bin/bash
+
+choice=$(echo -e "full screen\nselect area to grab" | dmenu -i)
+
+[ -z "$choice" ] && exit
+
+case $choice in
+    "full screen")
+        scr=$(echo "" | dmenu -i -p "Enter the name of the screenshot")
+        scrot $scr.png -d 1 -e 'mv $f /home/rsh/pics/scrots/';;
+
+    "select area to grab")
+        scr=$(echo "" | dmenu -i -p "Enter the name of the screenshot")
+        scrot $scr.png --select -d 1 -e 'mv $f /home/rsh/pics/scrots/';;
+esac
+
+notify-send.sh --icon="/home/rsh/pics/scrots/$scr.png" "Screenshot taken"

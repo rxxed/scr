@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd ~/pics/papes
+pape=$(sxiv -tof *)
+
+[ -z "$pape" ] && exit
+
+cp ~/pics/papes/$pape ~/.config/wall.png
+feh --bg-fill --no-fehbg ~/.config/wall.png

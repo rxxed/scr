@@ -1,0 +1,12 @@
+#!/usr/bin/sh
+
+term=$(echo "" | dmenu -p "Enter the term")
+[ -z $term ] && exit
+
+res=$(wiktionary $term)
+if [ "$res" = "" ]; then 
+        notify-send "No definition found";
+        exit
+fi
+
+notify-send -t 60000 "$res"
