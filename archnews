@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import sys
+import requests, webbrowser
+from bs4 import BeautifulSoup
+
+req = requests.get("https://archlinux.org/news")
+if req.status_code != 200:
+    exit()
+
+soup = BeautifulSoup(req.content, "lxml")
+news_list = soup.find_all('td', class_='wrap')
+
+try:
+    end = int(sys.argv[1])
+except:
+    end = 10
+
+index = 1
+for news in news_list:
+    print(f"{str(index)}. {news.string}")
+    index += 1
+    if index == end + 1:
+        break
+
+if input("\nDo you want to open one of these links? (y/n) ") == 'y':
+    choice = int(input(f"Enter the index of the news article: (1-{end}): "))
+else:
+    print("Quitting... done")
+    exit()
+
+if choice in range(1, end+1):
+    webbrowser.open(f"https://archlinux.org{news_list[choice - 1].a.get('href')}")
+else:
+    print("Index out of range.")
