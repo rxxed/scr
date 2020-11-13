@@ -8,6 +8,10 @@ case $1 in
             pactl set-sink-volume 0 -$2% &&
                     notify-send "Volume Down $(ponymix get-volume)" -t 200 -i $HOME/.config/volume_down_icon.png;;
     "mute")
-            pactl set-sink-mute 0 toggle &&
-                    notify-send "Volume Muted $(ponymix get-volume)" -t 200 -i $HOME/.config/volume_mute_icon.png;;
+            pactl set-sink-mute 0 toggle
+            if ponymix is-muted; then
+                    notify-send "Volume Muted $(ponymix get-volume)" -t 200 -i $HOME/.config/volume_mute_icon.png
+            else
+                    notify-send "Volume Unmuted $(ponymix get-volume)" -t 200 -i $HOME/.config/volume_up_icon.png
+            fi ;;
 esac
