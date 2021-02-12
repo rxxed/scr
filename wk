@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dir=$(find ~/workspace -type d | fzf --reverse --height=50%)
+dir=$(find ~/work -maxdepth 1 -type d | fzf --reverse --height=50%)
 [ -z $dir ] && exit
 
 lf $dir
