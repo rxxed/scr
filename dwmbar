@@ -9,7 +9,7 @@ con() {
 }
 
 bat() {
-        percent=$(acpi | grep "Battery 1" | awk '{print $4}' | tr -d ',%')
+        percent=$(acpi | grep "Battery 0" | awk '{print $4}' | tr -d ',%')
         state=$(acpi | grep "Battery 0" | awk '{print $3}' | tr -d ',')
         [ $state == "Charging" ] && echo "(c)$percent" && return
         echo $percent
@@ -33,7 +33,7 @@ temp () {
 }
 
 avail_storage() {
-        df -h | grep '/dev/sda8' | awk '{print $4}'
+        df -h | grep '/dev/sda2' | awk '{print $4}'
 }
 
 while true; do

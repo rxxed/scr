@@ -1,0 +1,5 @@
+#!/bin/sh
+
+term=$(echo "" | dmenu -p "Enter the search term")
+[ -z $term ] && exit
+notify-send -t 60000 "$(tuxi -r $term)"
